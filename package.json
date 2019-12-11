@@ -1,0 +1,23 @@
+{
+  "name": "isup",
+  "version": "0.0.1",
+  "description": "A tool to test whether an external service is up.",
+  "main": "check.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ygunayer/isup.git"
+  },
+  "scripts": {
+    "check": "node check",
+    "watch": "node watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "amqplib": "0.5.5",
+    "pg": "7.14.0",
+    "redis": "2.8.0",
+    "request": "2.88.0"
+  }
+}
