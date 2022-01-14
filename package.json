@@ -1,6 +1,6 @@
 {
   "name": "isup",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A tool to test whether an external service is up.",
   "main": "check.js",
   "repository": {
