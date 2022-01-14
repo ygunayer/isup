@@ -1,5 +1,7 @@
 const {delay, checkAll} = require('./index');
 
+const timeout = isNaN(process.env.TIMEOUT) ? -1 : Number(process.env.TIMEOUT);
+
 const watchInterval = isNaN(process.argv[2]) ? 0 : Number(process.argv[2]);
 if (watchInterval < 1 || watchInterval >= Infinity) {
   throw new Error('Please provide a valid watch interval in milliseconds');
@@ -7,10 +9,19 @@ if (watchInterval < 1 || watchInterval >= Infinity) {
 
 async function run() {
   console.log(`Will check service availability every ${watchInterval} milliseconds`);
+  if (timeout) {
+    console.log(`Will exhaust attempts after ${timeout} milliseconds`);
+  }
 
   let attempts = 0;
+  let t0 = Date.now();
 
   while (true) {
+    const elapsed = Date.now() - t0;
+    if (timeout && elapsed > timeout) {
+      throw new Error(`Timed out after ${elapsed} milliseconds`);
+    }
+
     try {
       await checkAll();
       return; // avoid recursive calls to prevent stack overflow
